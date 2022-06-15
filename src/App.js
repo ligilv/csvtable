@@ -3,11 +3,9 @@ import "./App.css";
 import objectData from "./hooks/data";
 function App() {
   const [finalData] = objectData();
-  const permData = finalData;
   const [fData, setFdata] = useState([]);
   useEffect(() => {
     setFdata(finalData);
-    // console.log(fData);
   }, [finalData]);
   const [pin, setPin] = useState();
   const filterData = (e) => {
@@ -22,7 +20,6 @@ function App() {
     } else {
       console.log("else");
       setFdata(finalData);
-      // setPin(e.target.value);
     }
   };
   return (
@@ -35,94 +32,93 @@ function App() {
           value={pin}
         ></input>
       </div>
-      <table
-        style={{
-          width: "80%",
-          // border: "1px ,solid ,#dddddd",
-          borderWidth: "2px",
-          borderStyle: "solid",
-          borderColor: "black",
-        }}
-      >
-        <tr>
-          <th>orderid</th>
-          <th>customerid</th>
-          <th>deliverypincode</th>
-          <th>orderdate</th>
-          <th>item</th>
-        </tr>
-        {fData.map((item, index) => {
-          return (
-            <tr key={index}>
-              <td
-                style={{
-                  // border: "1px ,solid ,#dddddd",
-                  borderWidth: "2px",
-                  borderStyle: "solid",
-                  borderColor: "black",
-                }}
-              >
-                {item.orderId}
-              </td>
-              <td
-                style={{
-                  // border: "1px ,solid ,#dddddd",
-                  borderWidth: "2px",
-                  borderStyle: "solid",
-                  borderColor: "black",
-                }}
-              >
-                {item.customerId}
-              </td>
-              <td
-                style={{
-                  // border: "1px ,solid ,#dddddd",
-                  borderWidth: "2px",
-                  borderStyle: "solid",
-                  borderColor: "black",
-                }}
-              >
-                {item.deliveryPincode}
-              </td>
-              <td
-                style={{
-                  // border: "1px ,solid ,#dddddd",
-                  borderWidth: "2px",
-                  borderStyle: "solid",
-                  borderColor: "black",
-                }}
-              >
-                {item.orderDate}
-              </td>
-              <td
-                style={{
-                  // border: "1px ,solid ,#dddddd",
-                  borderWidth: "2px",
-                  borderStyle: "solid",
-                  borderColor: "black",
-                }}
-              >
-                {item.items.map((i) => {
-                  const word = i.replace(":", "-");
-                  return (
-                    <>
-                      {word}
-                      <br></br>
-                    </>
-                  );
-                })}
-              </td>
+      {fData.length ? (
+        <div>
+          <table
+            style={{
+              width: "80%",
+              // border: "1px ,solid ,#dddddd",
+              borderWidth: "2px",
+              borderStyle: "solid",
+              borderColor: "black",
+            }}
+          >
+            <tr>
+              <th>orderid</th>
+              <th>customerid</th>
+              <th>deliverypincode</th>
+              <th>orderdate</th>
+              <th>item</th>
             </tr>
-          );
-        })}
-      </table>
-      {/* {finalData.map((item) => {
-        return (
-          <>
-            <div>{item.customerId}</div>=>{item.items.map((i) => i)}
-          </>
-        );
-      })} */}
+            {fData.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td
+                    style={{
+                      // border: "1px ,solid ,#dddddd",
+                      borderWidth: "2px",
+                      borderStyle: "solid",
+                      borderColor: "black",
+                    }}
+                  >
+                    {item.orderId}
+                  </td>
+                  <td
+                    style={{
+                      // border: "1px ,solid ,#dddddd",
+                      borderWidth: "2px",
+                      borderStyle: "solid",
+                      borderColor: "black",
+                    }}
+                  >
+                    {item.customerId}
+                  </td>
+                  <td
+                    style={{
+                      // border: "1px ,solid ,#dddddd",
+                      borderWidth: "2px",
+                      borderStyle: "solid",
+                      borderColor: "black",
+                    }}
+                  >
+                    {item.deliveryPincode}
+                  </td>
+                  <td
+                    style={{
+                      // border: "1px ,solid ,#dddddd",
+                      borderWidth: "2px",
+                      borderStyle: "solid",
+                      borderColor: "black",
+                    }}
+                  >
+                    {item.orderDate}
+                  </td>
+                  <td
+                    style={{
+                      // border: "1px ,solid ,#dddddd",
+                      borderWidth: "2px",
+                      borderStyle: "solid",
+                      borderColor: "black",
+                    }}
+                  >
+                    {item.items.map((i) => {
+                      const word = i.replace(":", "-");
+                      return (
+                        <>
+                          {word}
+                          <br></br>
+                        </>
+                      );
+                    })}
+                  </td>
+                </tr>
+              );
+            })}
+          </table>
+        </div>
+      ) : (
+        <h2>Nothing found search again</h2>
+      )}
     </>
   );
 }
