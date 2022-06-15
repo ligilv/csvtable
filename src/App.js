@@ -2,34 +2,63 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import objectData from "./hooks/data";
 function App() {
-  const [finalData] = objectData();
+  const [finalData, setFinalData] = objectData();
   const [fData, setFdata] = useState([]);
   useEffect(() => {
     setFdata(finalData);
   }, [finalData]);
-  const [pin, setPin] = useState();
-  const filterData = (e) => {
+  useEffect(() => {
+    console.log("fdata E", fData);
+    console.log("pin", pin);
+    console.log("date", date);
+  });
+  const [pin, setPin] = useState("");
+  const [date, setDate] = useState("");
+  const filterByPin = (e) => {
     setPin(e.target.value);
-    console.log(pin);
     if (e.target.value) {
-      console.log("in");
-      setFdata(
-        finalData.filter((item) => item.deliveryPincode == e.target.value)
+      const fil = fData.filter(
+        (item) => item.deliveryPincode == e.target.value
       );
-      console.log(fData);
-    } else {
-      console.log("else");
+      if (fil.length == 0) {
+        setFdata(finalData);
+      } else {
+        setFdata(fil);
+      }
+    } else if (!pin && !date) {
+      console.log("empty");
+      setFdata(finalData);
+    }
+  };
+  const filterByDate = (e) => {
+    setDate(e.target.value);
+    if (e.target.value) {
+      const fil = fData.filter((item) => item.orderDate == e.target.value);
+      if (fil.length == 0) {
+        setFdata(finalData);
+      } else {
+        setFdata(fil);
+      }
+    } else if (!pin && !e.target.value) {
       setFdata(finalData);
     }
   };
   return (
     <>
       <div>
-        filter{" "}
+        filter pin
         <input
           placeholder="enter pin to filer"
-          onInput={filterData}
+          onInput={filterByPin}
           value={pin}
+        ></input>
+      </div>
+      <div>
+        filter date
+        <input
+          placeholder="enter date to filter"
+          onInput={filterByDate}
+          value={date}
         ></input>
       </div>
       {fData.length ? (
