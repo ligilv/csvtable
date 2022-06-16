@@ -16,31 +16,54 @@ function App() {
   const [date, setDate] = useState("");
   const filterByPin = (e) => {
     setPin(e.target.value);
-    if (e.target.value) {
-      const fil = fData.filter(
-        (item) => item.deliveryPincode == e.target.value
-      );
-      if (fil.length == 0) {
-        setFdata(finalData);
-      } else {
-        setFdata(fil);
+    if (e.target.value !== "") {
+      if (date) {
+        console.log("1");
+        setFdata(
+          finalData.filter(
+            (item) =>
+              item.deliveryPincode == e.target.value && item.orderDate == date
+          )
+        );
+      } else if (e.target.value && !date) {
+        setFdata(
+          finalData.filter((item) => item.deliveryPincode == e.target.value)
+        );
+        console.log("3");
       }
-    } else if (!pin && !date) {
-      console.log("empty");
-      setFdata(finalData);
+    } else {
+      if (!e.target.value && !date) {
+        console.log("allemmpty");
+        setFdata(finalData);
+      } else if (!e.target.value && date) {
+        console.log("lat");
+        setFdata(finalData.filter((item) => item.orderDate == date));
+      }
     }
   };
+  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   const filterByDate = (e) => {
     setDate(e.target.value);
-    if (e.target.value) {
-      const fil = fData.filter((item) => item.orderDate == e.target.value);
-      if (fil.length == 0) {
-        setFdata(finalData);
-      } else {
-        setFdata(fil);
+    if (e.target.value !== "") {
+      if (pin) {
+        console.log("1");
+        setFdata(
+          finalData.filter(
+            (item) =>
+              item.deliveryPincode == pin && item.orderDate == e.target.value
+          )
+        );
+      } else if (e.target.value && !pin) {
+        setFdata(finalData.filter((item) => item.orderDate == e.target.value));
+        console.log("3");
       }
-    } else if (!pin && !e.target.value) {
-      setFdata(finalData);
+    } else {
+      if (!e.target.value && !pin) {
+        console.log("allemmpty");
+        setFdata(finalData);
+      } else if (!e.target.value && pin) {
+        setFdata(finalData.filter((item) => item.deliveryPincode == pin));
+      }
     }
   };
   return (
