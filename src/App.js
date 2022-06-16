@@ -70,6 +70,7 @@ function App() {
   };
   const sortbyPin = () => {
     //need to make a copy of state, directly it wasnt
+    //https://stackoverflow.com/questions/8837454/sort-array-of-objects-by-single-key-with-date-value
     function sortByKey([...array], key) {
       return array.sort(function (a, b) {
         var x = a[key];
@@ -79,6 +80,16 @@ function App() {
     }
     console.log(sortByKey(fData, "deliveryPincode"));
     setFdata(sortByKey(fData, "deliveryPincode"));
+  };
+  const sortbyid = () => {
+    function sortByKey([...array], key) {
+      return array.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        return x < y ? -1 : x > y ? 1 : 0;
+      });
+    }
+    setFdata(sortByKey(fData, "orderDate"));
   };
   return (
     <>
@@ -99,7 +110,7 @@ function App() {
         ></input>
       </div>
       <button onClick={sortbyPin}>sort by pin</button>
-      <button>sort by date</button>
+      <button onClick={sortbyid}>sort by date</button>
       {fData.length ? (
         <div>
           <table
