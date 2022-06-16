@@ -1,3 +1,6 @@
+Hosted in
+https://csvtable.netlify.app/
+
 This web App allows you to represent your csv data to table,
 the csv is first converted into array of objects, then it is passed on as a custom hook
 user can filter the table using Pincode and Date
