@@ -91,47 +91,81 @@ function App() {
     }
     setFdata(sortByKey(fData, "orderDate"));
   };
+
   return (
     <>
-      <div>
-        filter pin
-        <input
-          placeholder="enter pin to filer"
-          onInput={filterByPin}
-          value={pin}
-        ></input>
-      </div>
-      <div>
-        filter date
-        <input
-          placeholder="enter date to filter"
-          onInput={filterByDate}
-          value={date}
-        ></input>
-      </div>
-      <button onClick={sortbyPin}>sort by pin</button>
-      <button onClick={sortbyid}>sort by date</button>
-      {fData.length ? (
+      <div
+        style={{
+          flexDirection: "row",
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "30px",
+          background: "#D3EBCD",
+        }}
+      >
         <div>
+          filter by Pincode <br></br>
+          <input
+            placeholder="enter pin to filer"
+            onInput={filterByPin}
+            value={pin}
+          ></input>
+        </div>
+        <div>
+          filter by Date<br></br>
+          <input
+            placeholder="enter date to filter"
+            onInput={filterByDate}
+            value={date}
+          ></input>
+        </div>
+        <div
+          style={{
+            flexDirection: "column",
+            display: "flex",
+            backgroundColor: "red",
+            justifyContent: "space-between",
+          }}
+        >
+          <button onClick={sortbyPin}>sort by pin</button>
+          <button onClick={sortbyid}>sort by date</button>
+        </div>
+      </div>
+
+      {fData.length ? (
+        <div
+          style={{
+            padding: "100px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            backgroundColor: "#DFF6FF",
+          }}
+        >
           <table
             style={{
-              width: "80%",
-              // border: "1px ,solid ,#dddddd",
-              borderWidth: "2px",
-              borderStyle: "solid",
-              borderColor: "black",
+              width: "100%",
+              backgroundColor: "#FCF8E8",
+              // borderWidth: "2px",
+              // borderStyle: "solid",
+              // borderColor: "black",
             }}
           >
             <tr>
-              <th>orderid</th>
-              <th>customerid</th>
-              <th>deliverypincode</th>
-              <th>orderdate</th>
-              <th>item</th>
+              <th style={{ border: "2px solid black" }}>orderid</th>
+              <th style={{ border: "2px solid black" }}>customerid</th>
+              <th style={{ border: "2px solid black" }}>deliverypincode</th>
+              <th style={{ border: "2px solid black" }}>orderdate</th>
+              <th style={{ border: "2px solid black" }}>item</th>
             </tr>
             {fData.map((item, index) => {
               return (
-                <tr key={item.orderId}>
+                <tr
+                  key={item.orderId}
+                  style={{
+                    backgroundColor: index % 2 == 0 ? "#FCF9C6" : "#DFF6FF",
+                  }}
+                >
                   <td
                     style={{
                       // border: "1px ,solid ,#dddddd",
