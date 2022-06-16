@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { isCompositeComponentWithType } from "react-dom/test-utils";
 import "./App.css";
 import objectData from "./hooks/data";
 function App() {
@@ -7,10 +8,11 @@ function App() {
   useEffect(() => {
     setFdata(finalData);
   }, [finalData]);
+
   useEffect(() => {
-    console.log("fdata E", fData);
-    console.log("pin", pin);
-    console.log("date", date);
+    // console.log("fdata E", fData);
+    // console.log("pin", pin);
+    // console.log("date", date);
   });
   const [pin, setPin] = useState("");
   const [date, setDate] = useState("");
@@ -66,6 +68,18 @@ function App() {
       }
     }
   };
+  const sortbyPin = () => {
+    //need to make a copy of state, directly it wasnt
+    function sortByKey([...array], key) {
+      return array.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        return x < y ? -1 : x > y ? 1 : 0;
+      });
+    }
+    console.log(sortByKey(fData, "deliveryPincode"));
+    setFdata(sortByKey(fData, "deliveryPincode"));
+  };
   return (
     <>
       <div>
@@ -84,6 +98,8 @@ function App() {
           value={date}
         ></input>
       </div>
+      <button onClick={sortbyPin}>sort by pin</button>
+      <button>sort by date</button>
       {fData.length ? (
         <div>
           <table
@@ -104,7 +120,7 @@ function App() {
             </tr>
             {fData.map((item, index) => {
               return (
-                <tr key={index}>
+                <tr key={item.orderId}>
                   <td
                     style={{
                       // border: "1px ,solid ,#dddddd",
