@@ -21,7 +21,6 @@ export function toObj(array) {
           const splitItem = array[i][j].split(";");
           //remove last item which is ''
           splitItem.pop();
-          //   console.log(splitItem);
 
           tempObj.items = splitItem;
           break;

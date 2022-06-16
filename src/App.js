@@ -9,11 +9,6 @@ function App() {
     setFdata(finalData);
   }, [finalData]);
 
-  useEffect(() => {
-    // console.log("fdata E", fData);
-    // console.log("pin", pin);
-    // console.log("date", date);
-  });
   const [pin, setPin] = useState("");
   const [date, setDate] = useState("");
   const filterByPin = (e) => {
@@ -146,9 +141,6 @@ function App() {
             style={{
               width: "100%",
               backgroundColor: "#FCF8E8",
-              // borderWidth: "2px",
-              // borderStyle: "solid",
-              // borderColor: "black",
             }}
           >
             <tr>
@@ -168,7 +160,6 @@ function App() {
                 >
                   <td
                     style={{
-                      // border: "1px ,solid ,#dddddd",
                       borderWidth: "2px",
                       borderStyle: "solid",
                       borderColor: "black",
@@ -178,7 +169,6 @@ function App() {
                   </td>
                   <td
                     style={{
-                      // border: "1px ,solid ,#dddddd",
                       borderWidth: "2px",
                       borderStyle: "solid",
                       borderColor: "black",
@@ -198,7 +188,6 @@ function App() {
                   </td>
                   <td
                     style={{
-                      // border: "1px ,solid ,#dddddd",
                       borderWidth: "2px",
                       borderStyle: "solid",
                       borderColor: "black",
@@ -208,7 +197,6 @@ function App() {
                   </td>
                   <td
                     style={{
-                      // border: "1px ,solid ,#dddddd",
                       borderWidth: "2px",
                       borderStyle: "solid",
                       borderColor: "black",
